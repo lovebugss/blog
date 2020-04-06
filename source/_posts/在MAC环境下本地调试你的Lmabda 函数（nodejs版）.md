@@ -1,6 +1,8 @@
 ---
 title: 在MAC环境下本地调试你的Lmabda 函数（nodejs版）
-tags: 树sam派, aws
+tags: 
+    - sam
+    - aws
 categories: AWS
 ---
 这里主要使用工具为：AWS Serverless Application Model(sam)

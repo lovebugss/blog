@@ -206,7 +206,7 @@
         {{ post.content }}
       {%- endif %}
     </div>
-
+  {{ popular_posts( {} , post ) }}
     {#####################}
     {### END POST BODY ###}
     {#####################}
