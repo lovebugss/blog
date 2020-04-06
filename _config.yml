@@ -98,7 +98,10 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: ''
+  type: 'git'
+  repo: https://github.com/lovebugss/blog
+    # example, https://github.com/hexojs/hexojs.github.io
+  branch: gh-pages
 algolia:
   applicationID: '53MNDF560K'
   apiKey: 'a1331e41c0b313dc10316431bd64a9c7'
