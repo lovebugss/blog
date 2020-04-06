@@ -10,6 +10,7 @@ categories: Nginx
     基于域名的虚拟主机
     基于端口的虚拟主机
     基于IP的虚拟主机 
+<!-- more -->
 这里我们主要使用基于域名的虚拟主机，主要配置了 cdn.goclouds.cn，test1.goclouds.cn 和 hello.com 三个host。具体配置如下：
 ```
 user root; 
