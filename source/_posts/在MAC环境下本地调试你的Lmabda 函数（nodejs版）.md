@@ -10,7 +10,7 @@ categories: AWS
 1. 安装docker
 2. 安装brew
 3. 安装sam-cli
-
+<!-- more -->
 ###2. 部署一个HelloWorld程序
 执行`sam init`命令进行项目初始化
 ```shell
