@@ -1,6 +1,8 @@
 ---
 title: 在MAC环境下本地调试你的Lmabda 函数（nodejs版）
-tags: 树sam派, aws
+tags: 
+    - sam
+    - aws
 categories: AWS
 ---
 这里主要使用工具为：AWS Serverless Application Model(sam)
@@ -11,7 +13,7 @@ categories: AWS
 2. 安装brew
 3. 安装sam-cli
 <!-- more -->
-###2. 部署一个HelloWorld程序
+### 2. 部署一个HelloWorld程序
 执行`sam init`命令进行项目初始化
 
         $ sam init
@@ -79,7 +81,7 @@ categories: AWS
     # 测试    
     $ curl localhost:3000/hello
     {"message":"hello world"}
-###3. 使用IDE进行本地调试
+### 3. 使用IDE进行本地调试
 这里我们使用VS Code.
 首先使用VS Code 打开刚创建的项目， 如图：
 ![-w1440](https://i.loli.net/2020/04/06/s5rZYj6aI8qDCK9.jpg)
