@@ -13,57 +13,57 @@ categories: AWS
 <!-- more -->
 ###2. 部署一个HelloWorld程序
 执行`sam init`命令进行项目初始化
-```shell
-$ sam init
-# 选择模板源
-Which template source would you like to use?
-	1 - AWS Quick Start Templates # aws
-	2 - Custom Template Location # 自定义
-Choice: 1
-# 选择运行时环境
-Which runtime would you like to use?
-	1 - nodejs12.x
-	2 - python3.8
-	3 - ruby2.5
-	4 - go1.x
-	5 - java11
-	6 - dotnetcore2.1
-	7 - nodejs10.x
-	8 - nodejs8.10
-	9 - nodejs6.10
-	10 - python3.7
-	11 - python3.6
-	12 - python2.7
-	13 - java8
-	14 - dotnetcore2.0
-	15 - dotnetcore1.0
-Runtime: 7
-# 项目名称
-Project name [sam-app]:
-# 是否更新
-Quick start templates may have been updated. Do you want to re-download the latest [Y/n]: Y
 
-AWS quick start application templates:
-	1 - Hello World Example
-	2 - Quick Start: From Scratch
-	3 - Quick Start: Scheduled Events
-	4 - Quick Start: S3
-	5 - Quick Start: SNS
-	6 - Quick Start: SQS
-	7 - Quick Start: Web Backend
-Template selection: 1
+        $ sam init
+        # 选择模板源
+        Which template source would you like to use?
+            1 - AWS Quick Start Templates # aws
+            2 - Custom Template Location # 自定义
+        Choice: 1
+        # 选择运行时环境
+        Which runtime would you like to use?
+            1 - nodejs12.x
+            2 - python3.8
+            3 - ruby2.5
+            4 - go1.x
+            5 - java11
+            6 - dotnetcore2.1
+            7 - nodejs10.x
+            8 - nodejs8.10
+            9 - nodejs6.10
+            10 - python3.7
+            11 - python3.6
+            12 - python2.7
+            13 - java8
+            14 - dotnetcore2.0
+            15 - dotnetcore1.0
+        Runtime: 7
+        # 项目名称
+        Project name [sam-app]:
+        # 是否更新
+        Quick start templates may have been updated. Do you want to re-download the latest [Y/n]: Y
+        
+        AWS quick start application templates:
+            1 - Hello World Example
+            2 - Quick Start: From Scratch
+            3 - Quick Start: Scheduled Events
+            4 - Quick Start: S3
+            5 - Quick Start: SNS
+            6 - Quick Start: SQS
+            7 - Quick Start: Web Backend
+        Template selection: 1
+        
+        -----------------------
+        Generating application:
+        -----------------------
+        Name: sam-app
+        Runtime: nodejs10.x
+        Dependency Manager: npm
+        Application Template: hello-world
+        Output Directory: .
+        
+        Next steps can be found in the README file at ./sam-app/README.md
 
------------------------
-Generating application:
------------------------
-Name: sam-app
-Runtime: nodejs10.x
-Dependency Manager: npm
-Application Template: hello-world
-Output Directory: .
-
-Next steps can be found in the README file at ./sam-app/README.md
-```
 到此， 项目已经生成完毕。
 具体目录结构如下：
 ![-w556](https://i.loli.net/2020/04/06/AcOguHkBZTv9SIi.jpg)
