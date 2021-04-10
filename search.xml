@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>在MAC环境下本地调试你的Lmabda 函数（nodejs版）</title>
+      <link href="2021/04/10/%E5%9C%A8MAC%E7%8E%AF%E5%A2%83%E4%B8%8B%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95%E4%BD%A0%E7%9A%84Lmabda%20%E5%87%BD%E6%95%B0%EF%BC%88nodejs%E7%89%88%EF%BC%89/"/>
+      <url>2021/04/10/%E5%9C%A8MAC%E7%8E%AF%E5%A2%83%E4%B8%8B%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95%E4%BD%A0%E7%9A%84Lmabda%20%E5%87%BD%E6%95%B0%EF%BC%88nodejs%E7%89%88%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<p>这里主要使用工具为：AWS Serverless Application Model(sam)</p><blockquote><p><a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html</a></p></blockquote><h3 id="1-安装sam"><a href="#1-安装sam" class="headerlink" title="1. 安装sam"></a>1. 安装sam</h3><ol><li><p>安装docker</p></li><li><p>安装brew</p></li><li><p>安装sam-cli</p><a id="more"></a><h3 id="2-部署一个HelloWorld程序"><a href="#2-部署一个HelloWorld程序" class="headerlink" title="2. 部署一个HelloWorld程序"></a>2. 部署一个HelloWorld程序</h3><p>执行<code>sam init</code>命令进行项目初始化</p><pre><code> $ sam init # 选择模板源 Which template source would you like to use?     1 - AWS Quick Start Templates # aws     2 - Custom Template Location # 自定义 Choice: 1 # 选择运行时环境 Which runtime would you like to use?     1 - nodejs12.x     2 - python3.8     3 - ruby2.5     4 - go1.x     5 - java11     6 - dotnetcore2.1     7 - nodejs10.x     8 - nodejs8.10     9 - nodejs6.10     10 - python3.7     11 - python3.6     12 - python2.7     13 - java8     14 - dotnetcore2.0     15 - dotnetcore1.0 Runtime: 7 # 项目名称 Project name [sam-app]: # 是否更新 Quick start templates may have been updated. Do you want to re-download the latest [Y/n]: Y AWS quick start application templates:     1 - Hello World Example     2 - Quick Start: From Scratch     3 - Quick Start: Scheduled Events     4 - Quick Start: S3     5 - Quick Start: SNS     6 - Quick Start: SQS     7 - Quick Start: Web Backend Template selection: 1 ----------------------- Generating application: ----------------------- Name: sam-app Runtime: nodejs10.x Dependency Manager: npm Application Template: hello-world Output Directory: . Next steps can be found in the README file at ./sam-app/README.md</code></pre></li></ol><p>到此， 项目已经生成完毕。<br>具体目录结构如下：<br><img src="https://i.loli.net/2020/04/06/AcOguHkBZTv9SIi.jpg" alt="-w556"></p><p>启动并测试</p><pre><code>#启动项目$ sam local start-apiMounting HelloWorldFunction at http://127.0.0.1:3000/hello [GET]    You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. You only need to restart SAM CLI if you update your AWS SAM template    2020-04-04 10:12:48  * Running on http://127.0.0.1:3000/ (Press CTRL+C to quit)# 测试    $ curl localhost:3000/hello{"message":"hello world"}</code></pre><h3 id="3-使用IDE进行本地调试"><a href="#3-使用IDE进行本地调试" class="headerlink" title="3. 使用IDE进行本地调试"></a>3. 使用IDE进行本地调试</h3><p>这里我们使用VS Code.<br>首先使用VS Code 打开刚创建的项目， 如图：<br><img src="https://i.loli.net/2020/04/06/s5rZYj6aI8qDCK9.jpg" alt="-w1440"></p><p>首先我们先在代码中打上断点，<br><img src="https://i.loli.net/2020/04/06/RmMnPY13FGNoUOg.jpg" alt="-w1089"><br>然后再使用如下命令启动项目：</p><pre><code>    启动项目：    $ sam local invoke -e events/event.json --debug-port=5858 HelloWorldFunction    参数说明：        -e ：执行函数时，传入的event参数        --debug-port: 调试端口号        HelloWorldFunction 即为项目名称， 和yaml中对应。</code></pre><p>如下图：<br>    <img src="https://i.loli.net/2020/04/06/M3uncNk1vsTJ27G.jpg" alt="-w1117"></p><ol><li><p>debug<br> <img src="https://i.loli.net/2020/04/06/XgMQi3UYWfSadGm.jpg" alt="-w1051"><br>输入如下配置：</p><pre><code> {     "version": "0.2.0",     "configurations": [         {             "name": "Attach to SAM CLI",             "type": "node",             "request": "attach",             "address": "localhost",             "port": 5858,             // From the sam init example, it would be "${workspaceRoot}/hello-world"             "localRoot": "${workspaceRoot}/hello-world",             "remoteRoot": "/var/task",             "protocol": "inspector",             "stopOnEntry": false         }     ] }</code></pre></li></ol><p>然后点击DEBUG按钮就可以进行调试<br><img src="https://i.loli.net/2020/04/06/IO53AfTZemqWVkX.jpg" alt=""></p><p><img src="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/images/sam-debug.gif" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AWS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> sam </tag>
+            
+            <tag> aws </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树莓派4B 安装系统</title>
+      <link href="2021/04/10/%E6%A0%91%E8%8E%93%E6%B4%BE%204B%20%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F/"/>
+      <url>2021/04/10/%E6%A0%91%E8%8E%93%E6%B4%BE%204B%20%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-下载镜像"><a href="#1-下载镜像" class="headerlink" title="1. 下载镜像"></a>1. 下载镜像</h2><p>官方网站：<a href="https://www.raspberrypi.org/downloads/raspbian/" target="_blank" rel="noopener">https://www.raspberrypi.org/downloads/raspbian/</a>  这里我们选择：</p><a id="more"></a>        <p><img src="https://i.loli.net/2020/03/29/S6hwYAiPvf8uNmt.png" alt=""></p><h2 id="2-烧制镜像"><a href="#2-烧制镜像" class="headerlink" title="2. 烧制镜像"></a>2. 烧制镜像</h2><pre><code>a. 下载软件Win32DiskImager    链接:https://pan.baidu.com/s/1wTFWJ6O3Pm_mD0bhfDMKpg  密码:2unjb. 打开并选择镜像和盘符，然后点击Write开始写入到内存卡。</code></pre><p><img src="https://i.loli.net/2020/03/29/JqZQfMv59IpP6GS.png" alt=""><br>##3. 启动树莓派<br>    将刚烧制完成的内存卡插入到树莓派中，开机即可。<br>注意事项：</p><ol><li><p>使用micro线直接连接显示器时，请插入靠近电源的接口。 </p></li><li><p>使用micro线直接连接显示器时，请在烧制完镜像时修改config.txt 文件， 添加 </p><pre><code> hdmi_ignore_edid=0xa5000080</code></pre></li></ol><p>参考：<br>    <a href="https://www.raspberrypi.org/downloads/raspbian/" target="_blank" rel="noopener">https://www.raspberrypi.org/downloads/raspbian/</a><br>    <a href="https://www.cnblogs.com/EasonJim/p/6100158.html" target="_blank" rel="noopener">https://www.cnblogs.com/EasonJim/p/6100158.html</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 树莓派 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 树莓派 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>树莓派使用Ngrok进行内网穿透</title>
+      <link href="2021/04/10/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BD%BF%E7%94%A8Ngrok%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+      <url>2021/04/10/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%BD%BF%E7%94%A8Ngrok%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>本教程只为记录自己在实际操作中遇到的问题。具体步骤亲测有效。</p></blockquote><h3 id="0-背景"><a href="#0-背景" class="headerlink" title="0. 背景"></a>0. 背景</h3><p>使用树莓派做自己网站的服务器。</p><a id="more"></a><h3 id="1-注册Ngrok账号"><a href="#1-注册Ngrok账号" class="headerlink" title="1. 注册Ngrok账号"></a>1. 注册Ngrok账号</h3><p>网站地址：<a href="https://www.ngrok.cc" target="_blank" rel="noopener">https://www.ngrok.cc</a><br>具体注册方式不再赘述。</p><h3 id="2-创建隧道"><a href="#2-创建隧道" class="headerlink" title="2. 创建隧道"></a>2. 创建隧道</h3><p>注册完成后，我们开始创建隧道。<br>这里我们选择免费的通道，如图：<br><img src="https://i.loli.net/2020/03/30/cAjzwBSTQKp1ENy.png" alt=""><br>点击立即购买， 进入配置页面，如图：<br><img src="https://i.loli.net/2020/03/30/mJ38W7ZASTyvzLd.png" alt=""><br>添加完成后， 我们得到一条隧道，然后进行编辑：<br><img src="https://i.loli.net/2020/03/30/f83tjQNwqrvg5MK.png" alt=""><br>然后填写配置， 我这里是使用了自定义域名， 如果没有域名， 请选择使用前置域名。填写完成后点击保存修改。<br><img src="https://i.loli.net/2020/03/30/PkEfBdnX6gzDHVh.png" alt=""></p><h3 id="3-下载客户端"><a href="#3-下载客户端" class="headerlink" title="3. 下载客户端"></a>3. 下载客户端</h3><p>登录树莓派下载Nrgok客户端。客户端我们选择ARM版本。然后将下载好的文件上传至树莓派。<br><img src="https://i.loli.net/2020/03/30/C3vVFHj5zResxbl.png" alt=""><br>网站地址：<a href="https://www.ngrok.cc/download.html" target="_blank" rel="noopener">https://www.ngrok.cc/download.html</a><br>或直接在树莓派上下载， 具体命令如下：</p><pre><code>#1. 下载客户端wget  http://hls.ctopus.com/sunny/linux_arm.zip#2. 解压unzip linux_arm.zip</code></pre><h3 id="4-运行"><a href="#4-运行" class="headerlink" title="4. 运行"></a>4. 运行</h3><pre><code>#3. 运行客户端linux_arm/sunny clientid 隧道id</code></pre><p>到此， 就已经大功告成！在浏览器访问：<br><img src="https://i.loli.net/2020/03/30/fe7yYDmBSckt6xT.png" alt=""></p><p>官方文档：<a href="http://www.ngrok.cc/_book/start/ngrok_linux.html" target="_blank" rel="noopener">http://www.ngrok.cc/_book/start/ngrok_linux.html</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 树莓派 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 树莓派 </tag>
+            
+            <tag> ngrok </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Nginx配置虚拟主机</title>
+      <link href="2021/04/10/Nginx%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/"/>
+      <url>2021/04/10/Nginx%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>背景：cdn项目上，由于客户的IDC源站需要传入Host请求头，然后在预热的时候，也需要传入Host请求头进行预热，这就导致了和预热接口的冲突。所有需要自己搭建一套环境来模拟客户的IDC源。这里主要使用Nginx虚拟主机来完成。</p></blockquote><p>虚拟主机（Virtual Host）可以在一台服务器上绑定多个域名，架设多个不同的网站，一般在开发机或者要部署多个小网站的服务器上需要配置虚拟主机。Nginx配置虚拟主机主要有三种方式：</p><pre><code>基于域名的虚拟主机基于端口的虚拟主机基于IP的虚拟主机 </code></pre><a id="more"></a><p>这里我们主要使用基于域名的虚拟主机，主要配置了 cdn.goclouds.cn，test1.goclouds.cn 和 hello.com 三个host。具体配置如下：</p><pre><code>user root; worker_processes auto; #error_log /var/log/nginx/error.log; # 制定日志路径，级别。这个设置可以放入全局块，http块，server块，级别以此为：debug|info|notice|warn|error|crit|alert|emerg #pid /run/nginx.pid; events {     worker_connections  1024; } http {     include       mime.types; # 文件扩展名与文件类型映射表     default_type  application/octet-stream; # 默认文件类型(默认为text/plain）     sendfile        on; # 允许sendfile方式传输文件，默认为off，可以在http块，server块，location块。     keepalive_timeout  65; # 连接超时时间，默认为75s，可以在http，server，location块。     server { # 配置默认server，拒绝所有请求         listen 80 ;         server_name _; # _ 并不是重点 __ 也可以 ___也可以         return 403; # 403 forbidden     }     server { # 配置host1         listen       80;         server_name  cdn.goclouds.cn;         location / {             root   /home/ec2-user/web1/; # 根路径             index  index.html index.htm; # 设置欢迎页         }     }     server { # 配置host2         listen 80;         server_name  test1.goclouds.cn;         location / {             root   /home/ec2-user/web2/;             index  index.html index.htm;         }     }     server { # 配置host3         listen 80;         server_name  hello.com;         location / {             root   /home/ec2-user/web3/;             index  index.html index.htm;         }     } }</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

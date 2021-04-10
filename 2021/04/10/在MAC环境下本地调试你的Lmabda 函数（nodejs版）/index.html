@@ -1,0 +1,121 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>在MAC环境下本地调试你的Lmabda 函数（nodejs版）</title><meta name="description" content="一个小白的艰难成长之路"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="这里主要使用工具为：AWS Serverless Application Model(sam)
+
+https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html
+
+1. 安装sam
+安装docker
+
+安装brew
+
+安装sam-cli
+
+2. 部署一个HelloWorld程序执行sam init命令进行项目初始化
+ $ sam init
+ # 选择模板源
+ Which template source would you like to use?
+     1 - AWS Quick Start Templates # aws
+     2 - Custom Template Lo.."><meta name="generator" content="Hexo 4.2.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">任建鹏's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">在MAC环境下本地调试你的Lmabda 函数（nodejs版）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装sam"><span class="toc-text">1. 安装sam</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-部署一个HelloWorld程序"><span class="toc-text">2. 部署一个HelloWorld程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-使用IDE进行本地调试"><span class="toc-text">3. 使用IDE进行本地调试</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/sam"><i class="tag post-item-tag">sam</i></a><a href="/tags/aws"><i class="tag post-item-tag">aws</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">在MAC环境下本地调试你的Lmabda 函数（nodejs版）</h1><time class="has-text-grey" datetime="2021-04-10T09:28:58.768Z">2021-04-10</time><article class="mt-2 post-content"><p>这里主要使用工具为：AWS Serverless Application Model(sam)</p>
+<blockquote>
+<p><a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html" target="_blank" rel="noopener">https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html</a></p>
+</blockquote>
+<h3 id="1-安装sam"><a href="#1-安装sam" class="headerlink" title="1. 安装sam"></a>1. 安装sam</h3><ol>
+<li><p>安装docker</p>
+</li>
+<li><p>安装brew</p>
+</li>
+<li><p>安装sam-cli</p>
+<a id="more"></a>
+<h3 id="2-部署一个HelloWorld程序"><a href="#2-部署一个HelloWorld程序" class="headerlink" title="2. 部署一个HelloWorld程序"></a>2. 部署一个HelloWorld程序</h3><p>执行<code>sam init</code>命令进行项目初始化</p>
+<pre><code> $ sam init
+ # 选择模板源
+ Which template source would you like to use?
+     1 - AWS Quick Start Templates # aws
+     2 - Custom Template Location # 自定义
+ Choice: 1
+ # 选择运行时环境
+ Which runtime would you like to use?
+     1 - nodejs12.x
+     2 - python3.8
+     3 - ruby2.5
+     4 - go1.x
+     5 - java11
+     6 - dotnetcore2.1
+     7 - nodejs10.x
+     8 - nodejs8.10
+     9 - nodejs6.10
+     10 - python3.7
+     11 - python3.6
+     12 - python2.7
+     13 - java8
+     14 - dotnetcore2.0
+     15 - dotnetcore1.0
+ Runtime: 7
+ # 项目名称
+ Project name [sam-app]:
+ # 是否更新
+ Quick start templates may have been updated. Do you want to re-download the latest [Y/n]: Y
+
+ AWS quick start application templates:
+     1 - Hello World Example
+     2 - Quick Start: From Scratch
+     3 - Quick Start: Scheduled Events
+     4 - Quick Start: S3
+     5 - Quick Start: SNS
+     6 - Quick Start: SQS
+     7 - Quick Start: Web Backend
+ Template selection: 1
+
+ -----------------------
+ Generating application:
+ -----------------------
+ Name: sam-app
+ Runtime: nodejs10.x
+ Dependency Manager: npm
+ Application Template: hello-world
+ Output Directory: .
+
+ Next steps can be found in the README file at ./sam-app/README.md</code></pre></li>
+</ol>
+<p>到此， 项目已经生成完毕。<br>具体目录结构如下：<br><img src="https://i.loli.net/2020/04/06/AcOguHkBZTv9SIi.jpg" alt="-w556"></p>
+<p>启动并测试</p>
+<pre><code>#启动项目
+$ sam local start-api
+Mounting HelloWorldFunction at http://127.0.0.1:3000/hello [GET]
+    You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. You only need to restart SAM CLI if you update your AWS SAM template
+    2020-04-04 10:12:48  * Running on http://127.0.0.1:3000/ (Press CTRL+C to quit)
+# 测试    
+$ curl localhost:3000/hello
+{"message":"hello world"}</code></pre><h3 id="3-使用IDE进行本地调试"><a href="#3-使用IDE进行本地调试" class="headerlink" title="3. 使用IDE进行本地调试"></a>3. 使用IDE进行本地调试</h3><p>这里我们使用VS Code.<br>首先使用VS Code 打开刚创建的项目， 如图：<br><img src="https://i.loli.net/2020/04/06/s5rZYj6aI8qDCK9.jpg" alt="-w1440"></p>
+<p>首先我们先在代码中打上断点，<br><img src="https://i.loli.net/2020/04/06/RmMnPY13FGNoUOg.jpg" alt="-w1089"><br>然后再使用如下命令启动项目：</p>
+<pre><code>    启动项目：
+    $ sam local invoke -e events/event.json --debug-port=5858 HelloWorldFunction
+    参数说明：
+        -e ：执行函数时，传入的event参数
+        --debug-port: 调试端口号
+        HelloWorldFunction 即为项目名称， 和yaml中对应。</code></pre><p>如下图：<br>    <img src="https://i.loli.net/2020/04/06/M3uncNk1vsTJ27G.jpg" alt="-w1117"></p>
+<ol>
+<li><p>debug<br> <img src="https://i.loli.net/2020/04/06/XgMQi3UYWfSadGm.jpg" alt="-w1051"><br>输入如下配置：</p>
+<pre><code> {
+     "version": "0.2.0",
+     "configurations": [
+         {
+             "name": "Attach to SAM CLI",
+             "type": "node",
+             "request": "attach",
+             "address": "localhost",
+             "port": 5858,
+             // From the sam init example, it would be "${workspaceRoot}/hello-world"
+             "localRoot": "${workspaceRoot}/hello-world",
+             "remoteRoot": "/var/task",
+             "protocol": "inspector",
+             "stopOnEntry": false
+         }
+     ]
+ }</code></pre></li>
+</ol>
+<p>然后点击DEBUG按钮就可以进行调试<br><img src="https://i.loli.net/2020/04/06/IO53AfTZemqWVkX.jpg" alt=""></p>
+<p><img src="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/images/sam-debug.gif" alt=""></p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2021/04/10/%E6%A0%91%E8%8E%93%E6%B4%BE%204B%20%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F/" title="树莓派4B 安装系统"><span class="has-text-weight-semibold">下一页: 树莓派4B 安装系统</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/lovebugss"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> 任建鹏 2021</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
