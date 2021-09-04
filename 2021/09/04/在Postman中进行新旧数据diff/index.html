@@ -1,6 +1,7 @@
 <!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>使用Postman 进行新老接口数据diff</title><meta name="description" content="一个小白的艰难成长之路"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="使用Postman 进行新老接口数据对比
-背景: 公司最近需要将原有php服务使用java进行重构. 为了保证重构后的接口正确性, 需要对数据进行对比, 保证数据的完全一致. 所以就需要对数据进行对比.大致思路是: 再发送请求之前, 通过修改host, 先获取旧得数据, 然后放入环境变量. 然后再使用jsondiffpatch工具进行数据对比.
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+背景: 公司最近需要将原有php服务使用java进行重构. 为了保证重构后的接口正确性, 需要对数据进行对比, 保证数据的完全一致. 所以就需要对数据进行对比.大致思路是: 在发送请求之前, 通过修改host, 先获取旧得数据, 然后放入环境变量. 然后再使用jsondiffpatch工具进行数据对比.
+
 
 在Postman中引入jsondiffpatchPostman 支持js语法, 本身就有封装node环境. 所以可以引入第三方js库.
 具体方法如下:
@@ -9,11 +10,12 @@
  
  // 当运行多个测试用例时, 会导致文件拉去多次. 
  // 这里做个判断, 先检查环境变量中有没有, 若有就不重新拉取
- var c.."><meta name="generator" content="Hexo 4.2.1">
+ var code = pm.environmen.."><meta name="generator" content="Hexo 4.2.1">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">任建鹏's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">使用Postman 进行新老接口数据diff</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Postman-进行新老接口数据对比"><span class="toc-text">使用Postman 进行新老接口数据对比</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在Postman中引入jsondiffpatch"><span class="toc-text">在Postman中引入jsondiffpatch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#环境变量"><span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完整代码"><span class="toc-text">完整代码</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/postman"><i class="tag post-item-tag">postman</i></a><a href="/tags/diff"><i class="tag post-item-tag">diff</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">使用Postman 进行新老接口数据diff</h1><time class="has-text-grey" datetime="2021-09-04T16:46:00.929Z">2021-09-04</time><article class="mt-2 post-content"><h1 id="使用Postman-进行新老接口数据对比"><a href="#使用Postman-进行新老接口数据对比" class="headerlink" title="使用Postman 进行新老接口数据对比"></a>使用Postman 进行新老接口数据对比</h1><blockquote>
-<p>背景: 公司最近需要将原有php服务使用java进行重构. 为了保证重构后的接口正确性, 需要对数据进行对比, 保证数据的完全一致. 所以就需要对数据进行对比.<br>大致思路是: 再发送请求之前, 通过修改host, 先获取旧得数据, 然后放入环境变量. 然后再使用jsondiffpatch工具进行数据对比.</p>
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">任建鹏's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">使用Postman 进行新老接口数据diff</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在Postman中引入jsondiffpatch"><span class="toc-text">在Postman中引入jsondiffpatch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#环境变量"><span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完整代码"><span class="toc-text">完整代码</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/postman"><i class="tag post-item-tag">postman</i></a><a href="/tags/diff"><i class="tag post-item-tag">diff</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">使用Postman 进行新老接口数据diff</h1><time class="has-text-grey" datetime="2021-09-04T17:04:09.241Z">2021-09-04</time><article class="mt-2 post-content"><blockquote>
+<p>背景: 公司最近需要将原有php服务使用java进行重构. 为了保证重构后的接口正确性, 需要对数据进行对比, 保证数据的完全一致. 所以就需要对数据进行对比.<br>大致思路是: 在发送请求之前, 通过修改host, 先获取旧得数据, 然后放入环境变量. 然后再使用jsondiffpatch工具进行数据对比.</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="在Postman中引入jsondiffpatch"><a href="#在Postman中引入jsondiffpatch" class="headerlink" title="在Postman中引入jsondiffpatch"></a>在Postman中引入jsondiffpatch</h2><p>Postman 支持js语法, 本身就有封装node环境. 所以可以引入第三方js库.</p>
 <p>具体方法如下:</p>
 <ol>
@@ -33,18 +35,17 @@
      })
  }</code></pre>
 </li>
-<li><p>执行jsondiffpatch代码<br><img src="media/Untitled%201.png" alt="Untitled 1"></p>
+<li><p>执行jsondiffpatch代码</p>
+<p><img src="media/Untitled%201.png" alt="Untitled 1"></p>
+<pre><code class="jsx"> // 引入
+ let code = pm.environment.get("jsondiffpatch_code");
+ if(code){
+    (new Function(code))() 
+ }</code></pre>
+<p> 引入之后, 就可以使用jsondiffpatch了.</p>
 </li>
 </ol>
-<pre><code>```jsx
-// 引入
-let code = pm.environment.get("jsondiffpatch_code");
-if(code){
-   (new Function(code))() 
-}
-```
-
-引入之后, 就可以使用jsondiffpatch了.</code></pre><h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><pre><code class="jsx">*host: 新服务host
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><pre><code class="jsx">*host: 新服务host
 *old_host: 老服务host
 jsondiffpatch_code: 用来存储jsondiffpatch代码.
 old_data: 存放就接口数据.</code></pre>
