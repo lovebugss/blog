@@ -5,11 +5,11 @@ tags:
     - diff
 categories: TEST
 ---
-# 使用Postman 进行新老接口数据对比
 
 > 背景: 公司最近需要将原有php服务使用java进行重构. 为了保证重构后的接口正确性, 需要对数据进行对比, 保证数据的完全一致. 所以就需要对数据进行对比.
-> 大致思路是: 再发送请求之前, 通过修改host, 先获取旧得数据, 然后放入环境变量. 然后再使用jsondiffpatch工具进行数据对比.
+> 大致思路是: 在发送请求之前, 通过修改host, 先获取旧得数据, 然后放入环境变量. 然后再使用jsondiffpatch工具进行数据对比.
 
+<!-- more -->
 ## 在Postman中引入jsondiffpatch
 
 Postman 支持js语法, 本身就有封装node环境. 所以可以引入第三方js库.
@@ -37,8 +37,8 @@ Postman 支持js语法, 本身就有封装node环境. 所以可以引入第三�
     ```
 
 2. 执行jsondiffpatch代码
-![Untitled 1](media/Untitled%201.png)
 
+   ![Untitled 1](media/Untitled%201.png)
 
     ```jsx
     // 引入
