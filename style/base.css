@@ -126,10 +126,10 @@
   z-index: 100;
   overflow: hidden;
   width: 100vw;
-  height: 48px;
+  height: 42px;
   padding: 0 15px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
   background: var(--top-bar-bg-color); }
   .header-widget a {
     margin: 0 8px;
