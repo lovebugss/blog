@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://haojen.github.io/Claudia-theme-blog/" rel="nofollow">👉 Demo</a>
+  <a href="https://haojen.github.io/Claudia-theme-blog/" rel="nofollow">Demo</a>
 </p>
 
 <p align="center">
@@ -22,7 +22,7 @@
 ![cover](./screenshot/claudia-cover-v2.png)
 
 ## Changelog
-[Recent update 04.08.2021](CHANGELOG.md)
+[Recent update 04.12.2021](CHANGELOG.md)
 
 ## How to Use
 
@@ -147,7 +147,7 @@ layout: about
 ### My demo blog config
 https://github.com/Haojen/Claudia-theme-blog
 
-## And my another Hexo theme
+## Another my Hexo theme
 This it [Hexo-theme-Anisina](https://github.com/Haojen/hexo-theme-Anisina), hope you like it!
 
 ## License
