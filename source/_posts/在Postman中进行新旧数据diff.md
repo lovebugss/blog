@@ -38,8 +38,8 @@ Postman 支持js语法, 本身就有封装node环境. 所以可以引入第三�
     ```
 
 2. 执行jsondiffpatch代码
-![Untitled 1](https://i.loli.net/2021/09/05/HanOXY7QvRst94F.png)
 
+    ![Untitled 1](https://i.loli.net/2021/09/05/HanOXY7QvRst94F.png)
 
     ```jsx
     // 引入
